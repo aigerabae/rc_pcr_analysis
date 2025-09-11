@@ -163,3 +163,40 @@ process '5B_shankey_viz' {
         """
 }
 ```
+
+This also resulted in the next error that was due to unstable internet and old conda. Thus I created env_shankey.yml in workflow directory:
+```bash
+name: shankey_env
+channels:
+  - conda-forge
+dependencies:
+  - plotly=5.18.0
+  - pandas
+  - pip
+  - pip:
+      - kaleido==0.2.1
+```
+
+Then created the environment:
+```bash
+conda env create -f env_shankey.yml -p /workflow/envs/shankey_env
+```
+
+Then edited .nf file to point it to that environment:
+```nf
+// Visualization using shankeyplot
+process '5B_shankey_viz' {
+    tag '5B'
+    conda '/workflow/envs/shankey_env'
+    publishDir outDir + '/report/viz', mode: 'copy'
+    input:
+        file res from kma_5B
+    output:
+        file ".command.*"
+        file "shankey.png" into shankey_7B
+    script:
+        """
+        python ${baseDir}/bin/shankey.py --res ${res}
+        """
+}
+```
