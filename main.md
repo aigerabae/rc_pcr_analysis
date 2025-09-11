@@ -89,5 +89,23 @@ nextflow run RC-PCR.nf \
   --database SILVA \
   --threads 8 \
   -profile docker
-
 ```
+
+Adding something to directory then continuing:
+```bash
+nextflow run RC-PCR.nf \
+  --reads '/workflow/*_R{1,2}_001.fastq.gz' \
+  --outDir '/workflow/output' \
+  --database SILVA \
+  --threads 8 \
+  -profile docker \
+  -resume
+```
+
+Current script needs to have in the directiry with data also:
+- bin with certain scripts
+- conda with conda packages
+- db with SILVA primers
+- output folder for output
+- scripts folder with certain scripts
+- work folder for temporary files
