@@ -235,7 +235,9 @@ Then it had old versions of pango and cairo so I tried updatying them directly i
 apt-get update && apt-get install -y libcairo2 libpango-1.0-0 libgdk-pixbuf2.0-0
 ```
 
-Then it lacked pandas
+Then it lacked pandas and plotly and kaleido (needs version <1 to avoid having to install google chrome)
 ```bash
 pip install pandas
+pip install plotly
+pip install kaleido==0.2.1
 ```
