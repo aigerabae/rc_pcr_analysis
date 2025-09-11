@@ -200,3 +200,8 @@ process '5B_shankey_viz' {
         """
 }
 ```
+
+This still didn't work so I tried creatign the environment manually and then installling it via pip after activating:
+conda create -p /workflow/envs/shankey_env plotly=5.18.0 pandas pip -c conda-forge
+conda activate /workflow/envs/shankey_env
+pip install kaleido==0.2.1
