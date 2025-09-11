@@ -141,5 +141,25 @@ def createdf(input):
 
 Next error was about plotly and kaleidos versions, so inside the container I ran:
 ```bash
-conda install -c plotly plotly=6.1.1 -y
+pip install kaleido==0.2.1
+```
+
+It still didn't solve it so i edited the .nf script to contain specific versions (original version commented out but in the file i had to remove the commented line because it created a parsing error):
+```script
+// Visualization using shankeyplot
+process '5B_shankey_viz' {
+    tag '5B'
+    #conda 'plotly::plotly anaconda::pandas conda-forge::python-kaleido'
+    conda 'conda-forge::plotly=5.18.0 conda-forge::kaleido=0.2.1 conda-forge::pandas'
+    publishDir outDir + '/report/viz', mode: 'copy'
+    input:
+        file res from kma_5B
+    output:
+        file ".command.*"
+        file "shankey.png" into shankey_7B
+    script:
+        """
+        python ${baseDir}/bin/shankey.py --res ${res}
+        """
+}
 ```
