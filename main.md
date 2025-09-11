@@ -202,6 +202,12 @@ process '5B_shankey_viz' {
 ```
 
 This still didn't work so I tried creatign the environment manually and then installling it via pip after activating:
+```bash
 conda create -p /workflow/envs/shankey_env plotly=5.18.0 pandas pip -c conda-forge
 conda activate /workflow/envs/shankey_env
 pip install kaleido==0.2.1
+```
+
+Now it works (with pointing to created environment)
+
+Next error - cant finish 7b because it doesn't see the environment. so i need to point it to another enivornment or chnage it
