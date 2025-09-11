@@ -240,4 +240,36 @@ Then it lacked pandas and plotly and kaleido (needs version <1 to avoid having t
 pip install pandas
 pip install plotly
 pip install kaleido==0.2.1
+pip install matplotlib
+pip install weasyprint
 ```
+
+Needs some dependencies for weasyprint:
+```bash
+apt-get update && apt-get install -y \
+  libcairo2 \
+  libpango-1.0-0 \
+  libpangocairo-1.0-0 \
+  libpangoft2-1.0-0 \
+  libgdk-pixbuf2.0-0 \
+  libharfbuzz0b \
+  libfreetype6 \
+  libfontconfig1 \
+  libffi-dev
+```
+
+It asked me again to install jinja2
+```bash
+pip install jinja2
+```
+
+Might need to use a different container because this one uses Ubuntu 14 which very dated. But the reason why I decided to use that container is because I needed an old enough Nextflow to use DSL1 with it. Might want to install older nextflow using older releases on githb: https://github.com/nextflow-io/nextflow/releases/tag/v22.10.0 Problem again is that nextflow 22.10.0 requires java8 to java18 while i have java24
+
+I tried to create a docker image but now when i try to build it i get this error:
+docker build -f ./Dockerfile .
+[+] Building 0.0s (1/1) FINISHED                                                                             docker:default
+ => [internal] load build definition from Dockerfile                                                                   0.0s
+ => => transferring dockerfile: 2B                                                                                     0.0s
+ERROR: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
+(base) aygera@aygera-HP-Z6-G4-Workstation:~/biostar/NCB/for_container$ 
+
