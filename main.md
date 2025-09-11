@@ -225,3 +225,17 @@ Then it lacked module weasyprint so i installed inside docker and that environme
 ```bash
 pip install weasyprint==53.3
 ```
+It also lacked jinja2
+```bash
+pip install jinja2
+```
+
+Then it had old versions of pango and cairo so I tried updatying them directly in the docker image:
+```bash
+apt-get update && apt-get install -y libcairo2 libpango-1.0-0 libgdk-pixbuf2.0-0
+```
+
+Then it lacked pandas
+```bash
+pip install pandas
+```
