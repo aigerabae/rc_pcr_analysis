@@ -211,3 +211,17 @@ pip install kaleido==0.2.1
 Now it works (with pointing to created environment)
 
 Next error - cant finish 7b because it doesn't see the environment. so i need to point it to another enivornment or chnage it
+I made it use the overall environment in step 7b:
+```nf
+    conda '/miniconda/envs/WGS_COVID19'
+```
+
+Then it lacked permissions to use scripts so inside that folder 9not in docker or environent):
+```bash
+chmod +x scripts/**
+```
+
+Then it lacked module weasyprint so i installed inside docker and that environment
+```bash
+pip install weasyprint==53.3
+```
