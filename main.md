@@ -109,3 +109,37 @@ Current script needs to have in the directiry with data also:
 - output folder for output
 - scripts folder with certain scripts
 - work folder for temporary files
+
+I manually downloaded mkl-2023.1.0-h213fc3f_46344.tar.bz2 package from conda and copied it into docker miniconda/packaGES:
+```bash
+docker cp ~/mkl-2023.1.0-h213fc3f_46344.tar.bz2 4d5783f9e118:/miniconda/pkgs/
+```
+
+Then the next error was about python script shankey.py. The problem was that it didn't work because it filtered out all values in .res file. So i temporarily removed filtering to see if other steps would work. (commented filtering steps, will uncomment later)
+```python
+def createdf(input):
+    df = pd.read_csv(input, sep="\t")
+
+    print(df["#Template"])
+
+    #df = df[df["Depth"] >= 1]
+    #df = df[df["fragmentCount"] >= 100]
+    #df = df[df["Template_Coverage"] >= 50]
+
+    lvls = df["#Template"].str.split(";", expand = True)
+
+    df["lvl1"] = "Bacteria"
+    df["lvl2"] = lvls[1]
+    df["lvl3"] = lvls[2]
+    df["lvl4"] = lvls[3]
+    df["lvl5"] = lvls[4]
+    df["lvl6"] = lvls[5]
+    df["lvl7"] = lvls[6]
+
+    return df
+```
+
+Next error was about plotly and kaleidos versions, so inside the container I ran:
+```bash
+conda install -c plotly plotly=6.1.1 -y
+```
