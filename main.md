@@ -300,4 +300,59 @@ apt-get remove -y jdk-18
 apt --fix-broken install -y
 apt-get install -y openjdk-17-jdk
 java -version
+apt-get install -y curl
+cd /workspace/for_container
+cp nextflow /usr/local/bin/
+chmod +x /usr/local/bin/nextflow
+nextflow -version
 ```
+
+I have a container that has java17 and nextflow 22. Let's try running step 7b with it
+nextflow run RC-PCR.nf \
+  --reads '/workspace/V3-V4/*_R{1,2}_001.fastq.gz' \
+  --outDir '/workspace/V3-V4/output' \
+  --database SILVA \
+  --threads 8 \
+  -profile docker \
+  -resume
+
+Adding dependencies:
+inside```
+tar -xvzf conda.tar.gz
+# Install Miniconda
+curl -sSLo /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash /tmp/miniconda.sh -b -p /opt/conda
+rm /tmp/miniconda.sh
+
+# Make conda available in PATH
+export PATH=/opt/conda/bin:$PATH
+echo 'export PATH=/opt/conda/bin:$PATH' >> ~/.bashrc
+mv /workspace/conda/env-* /opt/conda/envs/
+```
+
+```bash
+# to enter that image:
+docker start -ai gallant_pasteur
+```
+
+conda 'conda-forge::pandas conda-forge::matplotlib conda-forge::weasyprint conda-forge::jinja2'
+
+running it with conda:
+nextflow run RC-PCR.nf \
+  --reads '/workspace/V3-V4/*_R{1,2}_001.fastq.gz' \
+  --outDir '/workspace/V3-V4/output' \
+  --database SILVA \
+  --threads 8 \
+  -profile conda \
+  -resume
+
+
+cp ../RC-PCR/16S_ID.yaml ./
+conda env create -f 16S_ID.yaml
+conda activate 16S_ID 
+
+I downloaded nexflow 22.10 into my current directory
+Then
+cp nextflow $CONDA_PREFIX/bin/
+chmod +x $CONDA_PREFIX/bin/nextflow
+to override their installation of nextflow in that environment
