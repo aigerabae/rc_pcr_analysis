@@ -273,3 +273,15 @@ docker build -f ./Dockerfile .
 ERROR: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
 (base) aygera@aygera-HP-Z6-G4-Workstation:~/biostar/NCB/for_container$ 
 
+Trying it in a different docker image (nextflowcent):
+```bash
+sh docker/run.sh try2 jonovox/nextflowcentos:latest
+```
+
+Inside container:
+```bash
+pip install weasyprint
+pip install jinja2
+conda install -c conda-forge "pango>=1.44"
+nextflow run RC-PCR.nf   --reads '/workflow/*_R{1,2}_001.fastq.gz'   --outDir '/workflow/output'   --database SILVA   --threads 8   -profile docker   -resume
+```
