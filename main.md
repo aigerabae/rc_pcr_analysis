@@ -356,3 +356,8 @@ Then
 cp nextflow $CONDA_PREFIX/bin/
 chmod +x $CONDA_PREFIX/bin/nextflow
 to override their installation of nextflow in that environment
+
+Adding pptrimmer,multiqc:
+conda install -c bioconda ptrimmer
+conda install -c bioconda multiqc
+pip install multiqc # because previous step didn't work (seeing error)
