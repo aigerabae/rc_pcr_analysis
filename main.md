@@ -285,3 +285,19 @@ pip install jinja2
 conda install -c conda-forge "pango>=1.44"
 nextflow run RC-PCR.nf   --reads '/workflow/*_R{1,2}_001.fastq.gz'   --outDir '/workflow/output'   --database SILVA   --threads 8   -profile docker   -resume
 ```
+
+Conda install was loading for too long so i decided to try making a container myself again. in NCB folder:
+```bash
+docker pull ubuntu:22.04
+docker run -it \
+  -v $(pwd):/workspace \
+  -w /workspace \
+  ubuntu:22.04 \
+  bash
+apt-get update
+apt-get install -y libasound2 libcups2 libx11-6 libxext6 libxrender1 libxtst6 libxi6   # needed for Oracle JDK .deb
+apt-get remove -y jdk-18
+apt --fix-broken install -y
+apt-get install -y openjdk-17-jdk
+java -version
+```
