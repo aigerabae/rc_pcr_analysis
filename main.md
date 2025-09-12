@@ -361,3 +361,7 @@ Adding pptrimmer,multiqc:
 conda install -c bioconda ptrimmer
 conda install -c bioconda multiqc
 pip install multiqc # because previous step didn't work (seeing error)
+
+
+After I'm done wth everything I will save this image to re use for another batch:
+docker commit gallant_pasteur my-nextflow:latest
