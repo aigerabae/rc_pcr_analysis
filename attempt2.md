@@ -66,7 +66,9 @@ To become:
 
 
 Still no progress. thinking about running
+```bash
 kma -t_db /workflow/db/SILVA/KMA/SILVA -ipe MetaGV9-A3_R1_fastp.fastq.gz MetaGV9-A3_R2_fastp.fastq.gz -t 24 -ef -ex_mode -1t1 -mq 120 -and -apm f -o MetaGV9-A3 
+```
 
 manually
 
