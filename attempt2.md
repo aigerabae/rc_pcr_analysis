@@ -1,13 +1,51 @@
 starting again. using v1,v6-v9 files and run batch script; also using nf_changed. 
 
+```bash
 docker pull jonovox/nextflowcentos:latest
+```
+
 downloading and unpacking https://surfdrive.surf.nl/files/index.php/s/5q2feFVult4v81k
 copying all folders and files from rc_pcr folder
 
 opening container (not necesary, dont do it to run batch):
+```bash
 sh docker/run.sh RC jonovox/nextflowcentos:latest
+```
 
 outside it running batch after putting files into workflow folder:
+```bash
 bash run_batch_docker.sh /home/aygera/biostar/NCB/attempt2/input/ _001.fastq.gz SILVA 8 jonovox/easyseq_covid19:latest SILVA_test
+```
 
 I added config file to root directory that made it use pre built conda environments. but it struggled at step3a. i changed name of env folder because i though it might be the step3a with wrong name
+
+I think it worked but i can't get it to run. it crashes but doesn't report ir. so now i want to test it manually:
+```bash
+docker run -it --rm \
+  -v /media/aygera/external_disk/biostar/NCB/attempt2:/workflow \
+  jonovox/easyseq_covid19:latest \
+  bash
+cd /workflow/work/96/b8d54a01a9c21890e58ca517adb45e
+conda activate /workflow/conda/env-84e06c5335c0a958ed012db619fdfceb
+kma -t_db /workflow/db/SILVA/KMA/SILVA \
+    -ipe MetaGV9-A3_R1_fastp.fastq.gz MetaGV9-A3_R2_fastp.fastq.gz \
+    -t 8 -ef -ex_mode -1t1 -mq 120 -and -apm f \
+    -o MetaGV9-A3_debug
+```
+
+Seemes to be working fine. i will change config file to simialrly show any messages by the software used
+This is my nextflow.config file:
+```code
+// Conda environment settings
+conda {
+    cacheDir = "$baseDir/conda"
+}
+
+cleanup = true
+
+process {
+    echo = true              // print commands being run
+    errorStrategy = 'terminate'  // stop if a task fails
+    executor = 'local'       // run jobs on the local machine
+}
+```
