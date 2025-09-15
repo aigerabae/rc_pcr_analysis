@@ -61,7 +61,7 @@ Let's wait a little. Maybe it just needs to finish
 In nf script i modified this line
     -ef -ex_mode -1t1 -mq 120 -and -apm f -o ${samplename} 2>/dev/null || exit 0
 To become:
-    -ef -ex_mode -1t1 -mq 120 -and -apm f -o ${samplename} || exit 0
+    -ef -ex_mode -1t1 -mq 120 -and -apm f -o ${samplename}
 
 
 
