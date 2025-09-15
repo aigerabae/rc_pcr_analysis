@@ -77,3 +77,5 @@ manually
 
 Okay so when i run this manually it still gets stuck on finding k mer ankers. idk how much time its going to take. let's wait 40 mins and see. if its still taking a while i will set it with nextflow to run until tomorrow morning but for now ill see if it can at least run one sample till the end of the day. one thing certain it definitely starts running so there is no issue with dependencies
 I removed || exit 0 part (from manual testing) because it causes program to report success even if it fails. Nonetheless its still stuck
+
+It's been 40 mins. still not finished, not even on 1 sample. I will pause it nw to finish some other work and then run it overnight with nf script
