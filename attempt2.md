@@ -17,7 +17,8 @@ outside it running batch after putting files into workflow folder:
 bash run_batch_docker.sh /home/aygera/biostar/NCB/attempt2/input/ _001.fastq.gz SILVA 8 jonovox/easyseq_covid19:latest SILVA_test
 ```
 
-I added config file to root directory that made it use pre built conda environments. but it struggled at step3a. i changed name of env folder because i though it might be the step3a with wrong name
+I added config file to root directory that made it use pre built conda environments. but it struggled at step3a. i copied name of env folder because i thought it might be the step3a with wrong name
+i copied env-7390a52046feb71a7f6f3361a867269b under name env-84e06c5335c0a958ed012db619fdfceb
 
 I think it worked but i can't get it to run. it crashes but doesn't report ir. so now i want to test it manually:
 ```bash
@@ -49,3 +50,6 @@ process {
     executor = 'local'       // run jobs on the local machine
 }
 ```
+
+It also struggled to get env for step6a so i copied env-3abca7a24ea4d6c708bf4c6cea6413d2
+ under name env-e79cb31e94a201cefc3ec441dba85424/
