@@ -59,10 +59,13 @@ bash run_batch_docker.sh /home/aygera/biostar/NCB/attempt2/input/ _001.fastq.gz 
 
 Let's wait a little. Maybe it just needs to finish
 In nf script i modified this line
+```nf
     -ef -ex_mode -1t1 -mq 120 -and -apm f -o ${samplename} 2>/dev/null || exit 0
+```
 To become:
+```nf
     -ef -ex_mode -1t1 -mq 120 -and -apm f -o ${samplename}
-
+```
 
 
 Still no progress. thinking about running
