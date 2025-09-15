@@ -53,3 +53,8 @@ process {
 
 It also struggled to get env for step6a so i copied env-3abca7a24ea4d6c708bf4c6cea6413d2
  under name env-e79cb31e94a201cefc3ec441dba85424/
+
+To run it faster I will use more CPUs:
+bash run_batch_docker.sh /home/aygera/biostar/NCB/attempt2/input/ _001.fastq.gz SILVA 24 jonovox/easyseq_covid19:latest SILVA_test
+
+Let's wait a little. Maybe it just needs to finish
