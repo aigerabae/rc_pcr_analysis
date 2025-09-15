@@ -9,3 +9,5 @@ sh docker/run.sh RC jonovox/nextflowcentos:latest
 
 outside it running batch after putting files into workflow folder:
 bash run_batch_docker.sh /home/aygera/biostar/NCB/attempt2/input/ _001.fastq.gz SILVA 8 jonovox/easyseq_covid19:latest SILVA_test
+
+I added config file to root directory that made it use pre built conda environments. but it struggled at step3a. i changed name of env folder because i though it might be the step3a with wrong name
