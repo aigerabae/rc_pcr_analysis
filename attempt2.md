@@ -58,3 +58,16 @@ To run it faster I will use more CPUs:
 bash run_batch_docker.sh /home/aygera/biostar/NCB/attempt2/input/ _001.fastq.gz SILVA 24 jonovox/easyseq_covid19:latest SILVA_test
 
 Let's wait a little. Maybe it just needs to finish
+In nf script i modified this line
+    -ef -ex_mode -1t1 -mq 120 -and -apm f -o ${samplename} 2>/dev/null || exit 0
+To become:
+    -ef -ex_mode -1t1 -mq 120 -and -apm f -o ${samplename} || exit 0
+
+
+
+Still no progress. thinking about running
+kma -t_db /workflow/db/SILVA/KMA/SILVA -ipe MetaGV9-A3_R1_fastp.fastq.gz MetaGV9-A3_R2_fastp.fastq.gz -t 24 -ef -ex_mode -1t1 -mq 120 -and -apm f -o MetaGV9-A3 || exit 0
+
+manually
+
+Okay so when i run this manually it still gets stuck on finding k mer ankers. idk how much time its going to take. let's wait 40 mins and see. if its still taking a while i will set it with nextflow to run until tomorrow morning but for now ill see if it can at least run one sample till the end of the day. one thing certain it definitely starts running so there is no issue with dependencies
