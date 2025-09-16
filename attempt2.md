@@ -210,3 +210,14 @@ apt-get update && apt-get install -y wkhtmltopdf
 
 
 I removed line that expects pdf output from nf script
+
+I changed final_report.py to make html file with embedded images.
+It worked!
+
+Now:
+1) check if this is correct (primers wise)
+2) check QC - whether the results are viable and data good
+3) understand how to interpret the results
+4) compare them with metadata - does it make sense?
+5) re run it for v3-v4 with appropriate primers
+6) compare the results
