@@ -142,7 +142,6 @@ sudo apt-get install build-essential python-dev python-pip libcairo2 libpango1.0
 
 Looking in documentation for weasyprint:
 WeasyPrint ‘v60.2’ (version i have) depends on:
-
 Python ≥ 3.7.0
 Pango ≥ 1.44.0
 pydyf ≥ 0.6.0
@@ -156,11 +155,40 @@ fontTools ≥ 4.0.0
 
 I have Python 3.8.5, pango-view (pango) 1.42.4 
 I can install these into conda env:
-/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install pydyf
-/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install cffi
-/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install html5lib
-/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install tinycss2
-/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install cssselect2
-/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install pyphen
-/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install fonttools
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install Pillow
 Have to check if they exist first and check versions
+
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import pydyf; print(pydyf.__version__, pydyf.__file__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import cffi; print(cffi.__version__, cffi.__file__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import html5lib; print(html5lib.__version__, html5lib.__file__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import tinycss2; print(tinycss2.__version__, tinycss2.__file__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import cssselect2; print(cssselect2.__version__, cssselect2.__file__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import pyphen; print(pyphen.__version__, pyphen.__file__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import PIL; import PIL.Image; print(PIL.__version__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import fontTools; print(fontTools.__version__, fontTools.__file__)"
+All available
+
+pango-view --version
+That's too old. need to upgrade to pango 1.44.0
+For pango dependencies are:
+GObject—2.0
+HarfBuzz—0.0
+
+For GObject-2.0 dependencies are:
+GLib—2.0
+
+That needs GTK, which needs meson. so starting first:
+sudo apt-get install python3 python3-pip python3-setuptools python3-wheel ninja-build
+pip3 install --user meson
+export PATH=$PATH:/.local/bin
+source ~/.bashrc
+meson setup --prefix /opt/gtk builddir
+CPPFLAGS="-I/opt/gtk/include"
+LDFLAGS="-L/opt/gtk/lib"
+PKG_CONFIG_PATH="/opt/gtk/lib/pkgconfig"
+export CPPFLAGS LDFLAGS PKG_CONFIG_PATH
+
+But then i read somwhere thatit unnecesary. so i tried
+sudo apt-get install libgtk-3-dev
+
+conda activate conda/env-3aeb9b79e220d9768a96c230b95029a2
