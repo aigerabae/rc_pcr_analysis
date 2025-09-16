@@ -79,3 +79,14 @@ Okay so when i run this manually it still gets stuck on finding k mer ankers. id
 I removed || exit 0 part (from manual testing) because it causes program to report success even if it fails. Nonetheless its still stuck
 
 It's been 40 mins. still not finished, not even on 1 sample. I will pause it nw to finish some other work and then run it overnight with nf script
+
+After about 16 hours it finished on all samples. however, the next step didn't work because it needs kaleido version 0.2.1:
+opening container:
+docker run -it --rm \
+  -v /home/aygera/biostar/NCB/attempt2:/workflow \
+  jonovox/easyseq_covid19:latest \
+  bash
+
+inside it:
+conda activate /workflow/conda/env-a1b65765c2bf2d3f21605d8abc9f0cd9
+pip install kaleido==0.2.1
