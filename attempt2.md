@@ -90,3 +90,41 @@ docker run -it --rm \
 inside it:
 conda activate /workflow/conda/env-a1b65765c2bf2d3f21605d8abc9f0cd9
 pip install kaleido==0.2.1
+This installed it into python 3.8
+so now need to:
+/workflow/conda/env-a1b65765c2bf2d3f21605d8abc9f0cd9/bin/pip install --force-reinstall kaleido==0.2.1
+
+That worked. Now environment for jinja2, matplotlib, pandas
+I copied env-3abca7a24ea4d6c708bf4c6cea6413d2 (step6) as env-3aeb9b79e220d9768a96c230b95029a2 
+cp -r env-3abca7a24ea4d6c708bf4c6cea6413d2/ ./env-3aeb9b79e220d9768a96c230b95029a2
+
+Inside container:
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/pip install pandas
+
+Now it lacks permissions for final_script.py:
+chmod +x scripts/final_report.py
+
+Now it needs pandas in /workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2. So it's the same env. why doesn't it see it? Might be because i was uin another enviroment while using pip
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install --force-reinstall pandas
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import pandas; print(pandas.__version__, pandas.__file__)"
+
+Now it needs weasyprint. I used that env that i got from i dont know where because it has weasyprint. now want to validate if it has pandas
+/workflow/conda/env-025066a104bf8ce5621e328d8009733a/bin/python -c "import pandas; print(pandas.__version__, pandas.__file__)"
+/workflow/conda/env-025066a104bf8ce5621e328d8009733a/bin/python -c "import matplotlib; print(matplotlib.__version__, matplotlib.__file__)"
+/workflow/conda/env-025066a104bf8ce5621e328d8009733a/bin/python -c "import jinja2; print(jinja2.__version__, jinja2.__file__)"
+
+It has all 3. now need to install weasyprint
+/workflow/conda/env-025066a104bf8ce5621e328d8009733a/bin/python -m pip install --force-reinstall weasyprint
+/workflow/conda/env-025066a104bf8ce5621e328d8009733a/bin/python -c "import weasyprint; print(weasyprint.__version__, weasyprint.__file__)"
+
+Now copying it to have the necesary name:
+cp -r env-025066a104bf8ce5621e328d8009733a/ ./env-3aeb9b79e220d9768a96c230b95029a2
+
+For some reason the error is there. Let's validate if necesary env has all 4:
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import pandas; print(pandas.__version__, pandas.__file__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import matplotlib; print(matplotlib.__version__, matplotlib.__file__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import jinja2; print(jinja2.__version__, jinja2.__file__)"
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import weasyprint; print(weasyprint.__version__, weasyprint.__file__)"
+
+Still no weasyprint. Let's install it in here:
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install --force-reinstall weasyprint
