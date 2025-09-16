@@ -200,3 +200,13 @@ pip uninstall weasyprint
 /workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install "weasyprint==52.5"
 weasyprint --info
 
+
+
+
+
+### I will try changing the script to not use weasyprint
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install pdfkit
+apt-get update && apt-get install -y wkhtmltopdf
+
+
+I removed line that expects pdf output from nf script
