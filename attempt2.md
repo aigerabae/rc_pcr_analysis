@@ -157,7 +157,7 @@ I have Python 3.8.5, pango-view (pango) 1.42.4
 I can install these into conda env:
 /workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install Pillow
 Have to check if they exist first and check versions
-
+conda activate conda/env-3aeb9b79e220d9768a96c230b95029a2
 /workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import pydyf; print(pydyf.__version__, pydyf.__file__)"
 /workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import cffi; print(cffi.__version__, cffi.__file__)"
 /workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -c "import html5lib; print(html5lib.__version__, html5lib.__file__)"
@@ -190,5 +190,13 @@ export CPPFLAGS LDFLAGS PKG_CONFIG_PATH
 
 But then i read somwhere thatit unnecesary. so i tried
 sudo apt-get install libgtk-3-dev
+I tried adding symlink ln -s /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0 /usr/lib/x86_64-linux-gnu/gobject-2.0-0
+But nothing works
 
+
+I tried to make it work in virtual environment and it worked. Let's try to do the same thing for real env:
 conda activate conda/env-3aeb9b79e220d9768a96c230b95029a2
+pip uninstall weasyprint
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install "weasyprint==52.5"
+weasyprint --info
+
