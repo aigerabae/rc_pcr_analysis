@@ -128,3 +128,39 @@ For some reason the error is there. Let's validate if necesary env has all 4:
 
 Still no weasyprint. Let's install it in here:
 /workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install --force-reinstall weasyprint
+
+It now needs docker-wide installations:
+apt-get update && apt-get install -y \
+    libglib2.0-0 \
+    libcairo2 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libgdk-pixbuf2.0-0 \
+    shared-mime-info
+Didn't work. Let's google:
+sudo apt-get install build-essential python-dev python-pip libcairo2 libpango1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info
+
+Looking in documentation for weasyprint:
+WeasyPrint ‘v60.2’ (version i have) depends on:
+
+Python ≥ 3.7.0
+Pango ≥ 1.44.0
+pydyf ≥ 0.6.0
+CFFI ≥ 0.6
+html5lib ≥ 1.1
+tinycss2 ≥ 1.0.0
+cssselect2 ≥ 0.1
+Pyphen ≥ 0.9.1
+Pillow ≥ 9.1.0
+fontTools ≥ 4.0.0
+
+I have Python 3.8.5, pango-view (pango) 1.42.4 
+I can install these into conda env:
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install pydyf
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install cffi
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install html5lib
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install tinycss2
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install cssselect2
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install pyphen
+/workflow/conda/env-3aeb9b79e220d9768a96c230b95029a2/bin/python -m pip install fonttools
+Have to check if they exist first and check versions
