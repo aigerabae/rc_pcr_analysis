@@ -25,3 +25,37 @@ CCTACGGGNGGCWGCAG
 >primers_R
 GACTACHVGGGTATCTAATCC
 ```
+
+I also copied KMA folder to db/ILLUMINA_V3V4 and renamed all SILVA files to ILLUMINA_V3V4
+
+I modified shankey.py script to say unclassified if data are unavailable:
+```shankey.py
+def createdf(input):
+    df = pd.read_csv(input, sep="\t")
+
+    print(df["#Template"])
+
+    df = df[df["Depth"] >= 1]
+    df = df[df["fragmentCount"] >= 100]
+    df = df[df["Template_Coverage"] >= 50]
+
+    lvls = df["#Template"].str.split(";", expand = True)
+    
+    df["lvl1"] = "Bacteria"
+    
+    if len(lvls) > 1:
+        df["lvl2"] = lvls[1]
+        df["lvl3"] = lvls[2]
+        df["lvl4"] = lvls[3]
+        df["lvl5"] = lvls[4]
+        df["lvl6"] = lvls[5]
+        df["lvl7"] = lvls[6]
+    else:
+        df["lvl2"] = "Unclassified"
+        df["lvl3"] = "Unclassified"
+        df["lvl4"] = "Unclassified"
+        df["lvl5"] = "Unclassified"
+        df["lvl6"] = "Unclassified"
+        df["lvl7"] = "Unclassified"
+    return df
+```
